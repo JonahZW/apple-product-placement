@@ -298,4 +298,5 @@ app.layout = html.Div([
 
 # run the app!
 if __name__ == '__main__':
-    app.run(jupyter_mode='tab', debug=True)
+    app.run_server(debug=True) # comment this line when developing locally
+    # app.run(jupyter_mode='tab', debug=True) # comment this line in production
