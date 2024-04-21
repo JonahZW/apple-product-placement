@@ -215,7 +215,7 @@ def scatter_ratings(title, year, type, device, imgCount, rating):
         'averageRating':'mean',
         'Season':'count',
         'Episode':'count',
-        'imgCount':'mean' 
+        'imgCount':'sum' 
     }
     resolved_data = resolved_df.groupby(same_cols).agg(agg_dict).drop(columns=['Season','Device']).reset_index()
     resolved_data = resolved_data[resolved_data['imgCount'] > 1]
@@ -363,7 +363,7 @@ app.layout = dbc.Container([
     html.Footer([ 
         html.P('This dashboard was created by Jonah Werbel for DS 4003 (taught by Dr. Natalie Kupperman) at UVA in Spring 2024.'),
         html.P(['Data originally sourced from ',html.A('Kaggle', 
-            href='https://www.kaggle.com/datasets/mohammadhmozafary/\apples-product-placements-in-movies-and-tv-shows'),
+            href='https://www.kaggle.com/datasets/mohammadhmozafary/apples-product-placements-in-movies-and-tv-shows'),
             '. See the GitHub repository with all work for this project ',html.A('here', 
             href='https://github.com/JonahZW/apple-product-placement/'),'.'])
     ], className='row text-light bg-dark p-4', style={'text-align':'center'})
