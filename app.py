@@ -14,6 +14,8 @@ app = Dash(__name__, external_stylesheets=stylesheets) # initialize the app
 server = app.server # make it work for render
 
 load_figure_template("lux")
+bootstrap_colors = ['rgb(60, 60, 60)', 'rgb(198, 91, 85)', 'rgb(104, 189, 122)', 'rgb(246, 195, 112)', 'rgb(90, 153, 203)', 
+                    'rgb(111, 111, 111)', 'rgb(223, 167, 164)'] # the colors for LUX theme so I can reuse as needed
 
 
 # read CSV with data in
@@ -180,8 +182,9 @@ def pie_devices(title, year, type, device, imgCount, rating):
         values='count',
         names='Device',
         title='Apple Products Placed in Titles by Device',
-        height=500,
+        height=500
     )
+    fig.update_traces(sort=False, direction='clockwise')
     return fig
 
 # creates scatterplot of rating vs number of product placements
@@ -282,6 +285,7 @@ def line_device_time(title, year, type, device, imgCount, rating,line_device_rad
             'imgCount':y_axis_title,
             'startYear':'Year'
         },
+        color_discrete_sequence=bootstrap_colors[:len(resolved_df['Device'].unique())],
         height=420
     )
     fig.update_xaxes(type='category')
