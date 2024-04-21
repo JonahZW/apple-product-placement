@@ -363,9 +363,9 @@ app.layout = dbc.Container([
     html.Footer([ 
         html.P('This dashboard was created by Jonah Werbel for DS 4003 (taught by Dr. Natalie Kupperman) at UVA in Spring 2024.'),
         html.P(['Data originally sourced from ',html.A('Kaggle', 
-            href='https://www.kaggle.com/datasets/mohammadhmozafary/apples-product-placements-in-movies-and-tv-shows'),
+            href='https://www.kaggle.com/datasets/mohammadhmozafary/apples-product-placements-in-movies-and-tv-shows', className='text-success'),
             '. See the GitHub repository with all work for this project ',html.A('here', 
-            href='https://github.com/JonahZW/apple-product-placement/'),'.'])
+            href='https://github.com/JonahZW/apple-product-placement/', className='text-success'),'.'])
     ], className='row text-light bg-dark p-4', style={'text-align':'center'})
 ], className='dbc', fluid=True)
 
