@@ -19,7 +19,7 @@ bootstrap_colors = ['rgb(60, 60, 60)', 'rgb(198, 91, 85)', 'rgb(104, 189, 122)',
 
 
 # read CSV with data in
-df = pd.read_csv('data.csv', low_memory=False)
+df = pd.read_csv('data/data.csv', low_memory=False)
 df = df[df['startYear'] > 2019]
 
 
