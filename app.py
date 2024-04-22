@@ -56,7 +56,7 @@ def title(type, year):
     return [{'label': i, 'value': i} for i in df.loc[df['Media'].isin(type) & (df['startYear'] >= year[0]) & (df['startYear'] <= year[1])]['Title'].unique()]
 
 title_dropdown = html.Div([
-    html.Label('Specific Title (select none to see all)'),
+    html.Label('Specific Title (selecting none displays all)'),
     dcc.Dropdown(id = 'title', options = df['Title'].unique(), multi = True),
     html.Br()
 ])
@@ -79,13 +79,13 @@ year_slider = html.Div([
 
 type_dropdown = html.Div([
     html.Label('Movie or Show'),
-    dcc.Dropdown(id = 'type', options = ['Movie', 'Show'], multi = True),
+    dcc.Dropdown(id = 'type', options = ['Movie', 'Show'], multi = True, value=['Movie','Show']),
     html.Br()
 ])
 
 device_dropdown = html.Div([
     html.Label('Device'),
-    dcc.Dropdown(id = 'device', options = df['Device'].unique(), multi = True),
+    dcc.Dropdown(id = 'device', options = df['Device'].unique(), multi = True, value=df['Device'].unique()),
     html.Br()
 ])
 
@@ -317,17 +317,21 @@ line_device_time_div = html.Div([
     ),
     html.Div([
         html.Label('Select below to change grouping of the data on the y-axis of graph above',htmlFor='line_device_radio'),
-        dcc.RadioItems(
-            options = {
-                'mean' : 'Average',
-                'count' : 'Count',
-                'sum' : 'Sum'
-            },
+        dbc.RadioItems(
+            options = [
+                {'label': 'Average', 'value': 'mean', 'label_id': 'mean-rdio'},
+                {'label': 'Count', 'value': 'count', 'label_id': 'count-rdio'},
+                {'label': 'Sum', 'value': 'sum', 'label_id': 'sum-rdio'}
+            ],
             value = 'mean',
             inline=True,
             id='line_device_radio',
-            labelStyle={'display': 'inline-block','padding': '7px'}
-        )
+            labelStyle={'display': 'inline-block','padding-right': '7px', 'textDecoration': 'underline dotted', 'cursor': 'pointer'}
+        ),
+        # add tooltips to explain what each option actually does
+        dbc.Tooltip('Average number of instances of each device per title in a year', target='mean-rdio', placement='bottom'),
+        dbc.Tooltip('Total number of titles which contained multiple instances of a device per year', target='count-rdio', placement='bottom'),
+        dbc.Tooltip('Total number of times the specified device appeared in titles in a given year', target='sum-rdio', placement='bottom')
         ], style={"textAlign": "center",'margin-right':'3%','margin-left':'3%'}, className='row bg-light card mb-2')
     ])
 ], className='card border-secondary', style={'float':'right', 'width':'63%'})#f"{100*2/3-1}%"})
